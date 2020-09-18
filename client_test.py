@@ -35,7 +35,7 @@ class ClientTest(unittest.TestCase):
   def test_getRatio_calculateRatioPriceBEqualZero(self):
     price_a = 356.4
     price_b = 0
-    self.assertEqual(getRatio(price_a, price_b), )
+    self.assertEqual(getRatio(price_a, price_b), None)
 
   def test_getRatio_calculateRatioPriceAEqualZero(self):
     price_a = 0
@@ -45,7 +45,7 @@ class ClientTest(unittest.TestCase):
   def test_getRatio_calculateRatioBothPricesEqualZero(self):
     price_a = 0
     price_b = 0
-    self.assertEqual(getRatio(price_a, price_b), )
+    self.assertEqual(getRatio(price_a, price_b), None)
 
 
 if __name__ == '__main__':
