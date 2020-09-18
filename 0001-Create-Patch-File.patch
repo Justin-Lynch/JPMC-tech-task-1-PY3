@@ -1,0 +1,114 @@
+From 0548f097443ccc223997f945e43cff68b5c95a83 Mon Sep 17 00:00:00 2001
+From: Justin Lynch <justin.lynch876@gmail.com>
+Date: Fri, 18 Sep 2020 16:43:15 -0500
+Subject: [PATCH] Create Patch File
+
+---
+ ...tests-for-the-methods-in-client-file.patch |  68 ------------------
+ __pycache__/client3.cpython-38.pyc            | Bin 1143 -> 0 bytes
+ 2 files changed, 68 deletions(-)
+ delete mode 100644 0001-Created-unit-tests-for-the-methods-in-client-file.patch
+ delete mode 100644 __pycache__/client3.cpython-38.pyc
+
+diff --git a/0001-Created-unit-tests-for-the-methods-in-client-file.patch b/0001-Created-unit-tests-for-the-methods-in-client-file.patch
+deleted file mode 100644
+index 2c07501..0000000
+--- a/0001-Created-unit-tests-for-the-methods-in-client-file.patch
++++ /dev/null
+@@ -1,68 +0,0 @@
+-From 5369a4a8b213a93a8277657ba691417f22b655e5 Mon Sep 17 00:00:00 2001
+-From: Justin Lynch <justin.lynch876@gmail.com>
+-Date: Fri, 18 Sep 2020 16:16:33 -0500
+-Subject: [PATCH] Created unit tests for the methods in client file
+-
+----
+- client_test.py | 29 ++++++++++++++++++++++++++++-
+- 1 file changed, 28 insertions(+), 1 deletion(-)
+-
+-diff --git a/client_test.py b/client_test.py
+-index af2bf26..e36c9e4 100644
+---- a/client_test.py
+-+++ b/client_test.py
+-@@ -1,5 +1,5 @@
+- import unittest
+--from client3 import getDataPoint
+-+from client3 import getDataPoint, getRatio
+- 
+- class ClientTest(unittest.TestCase):
+-   def test_getDataPoint_calculatePrice(self):
+-@@ -8,6 +8,8 @@ class ClientTest(unittest.TestCase):
+-       {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
+-     ]
+-     """ ------------ Add the assertion below ------------ """
+-+    for quote in quotes:
+-+      self.assertEqual(getDataPoint(quote), (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], (quote['top_bid']['price'] + quote['top_ask']['price'])/2))
+- 
+-   def test_getDataPoint_calculatePriceBidGreaterThanAsk(self):
+-     quotes = [
+-@@ -15,10 +17,35 @@ class ClientTest(unittest.TestCase):
+-       {'top_ask': {'price': 121.68, 'size': 4}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 117.87, 'size': 81}, 'id': '0.109974697771', 'stock': 'DEF'}
+-     ]
+-     """ ------------ Add the assertion below ------------ """
+-+    for quote in quotes:
+-+      self.assertEqual(getDataPoint(quote), (quote['stock'], quote['top_bid']['price'], quote['top_ask']['price'], (quote['top_bid']['price'] + quote['top_ask']['price'])/2))
+- 
+- 
+-   """ ------------ Add more unit tests ------------ """
+-+  def test_getRatio_calculateRatio(self):
+-+    price_a = 356.4
+-+    price_b = 119.2
+-+    self.assertEqual(getRatio(price_a, price_b), price_a/price_b)
+- 
+-+  def test_getRatio_calculateRatioPriceBGreaterThanPriceA(self):
+-+    price_a = 119.2
+-+    price_b = 356.4
+-+    self.assertEqual(getRatio(price_a, price_b), price_a/price_b)
+-+ 
+-+  def test_getRatio_calculateRatioPriceBEqualZero(self):
+-+    price_a = 356.4
+-+    price_b = 0
+-+    self.assertEqual(getRatio(price_a, price_b), )
+-+
+-+  def test_getRatio_calculateRatioPriceAEqualZero(self):
+-+    price_a = 0
+-+    price_b = 119.7
+-+    self.assertEqual(getRatio(price_a, price_b), 0)
+-+
+-+  def test_getRatio_calculateRatioBothPricesEqualZero(self):
+-+    price_a = 0
+-+    price_b = 0
+-+    self.assertEqual(getRatio(price_a, price_b), )
+- 
+- 
+- if __name__ == '__main__':
+--- 
+-2.27.0.windows.1
+-
+diff --git a/__pycache__/client3.cpython-38.pyc b/__pycache__/client3.cpython-38.pyc
+deleted file mode 100644
+index f43cd109e647e9cbb1f77933adcab8acfc55c309..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+HcmV?d00001
+
+literal 1143
+zcmYjQPjA~c6elH0mJ_@4n!jFm;06?%fu_mOOJQVNx43IDY+2eOhY~IXS$s~E$dW_S
+zMe8{y?}IqUeUTmZ5qRCH_nmgy6P*Ml@&5AZ@x33Pj+@ODf@}YCh&|N)sf>?T9gQbQ
+z`fp^CNSYHto%Dp~q%V9YnPAcrf%HWvnGF6Qq9#LGLm5F`M(3XT3szti!a1GO9(nUl
+zG{9dpfu7x2d;-Cu1#H2t$Q8Y!i%%;l?q)=+!Cj2q6YEfe^*QY`u^~3ame_`ESc8py
+z0&Q7`4cLS&*dDS?GN+VWyhHB_M6f1T+XQ)|P3GS9*)Nj5BAw<3?1vmqzc@8!+}+*H
+z%QVSPOKrN3_a5)<UQ9r}|2~u7{(hPLO9@GlZdZUBLpngxPms+Jmo~YirqaANkv`r>
+zFFj|oTic&`Gk=T7;2ybTGg?_QHe^^$IPLNyRmw>UJjruj4!Jo6UI0jt{B4p?Kyy>_
+z6DU9>27|avOfoLB!f+dCQ>N#(X3B9q$fOO%DobH$C;I$@hb4BX4TgD{m`-4Wi%Drf
+zRc>3y58`Ef9b=cOs=E7=s8tmIJwNF7k2NUWKbvTi^?xg%r?R)u@0ICf1clN4XPJ3E
+z8T5ZX`t@MPKzh1kFxAdCJ4de{_0v4Vm`4xC?``7*Ob^RGa%E#~?Pkx9XbX3PswVo<
+zs;rw;=@mJo*HM{KNpX@I(tCwi&*(jZ==swx`7<yak;%#mJJ(N~@T8E}`hctI1rJ?I
+z9naRTLvECTJ6N&?2HFT~eOcw}pru1(ghd{ss^w1Oc$8#C98bS`QDG_hea#cYzeY5>
+z_w@sg{X6NdL9H{5TsDle{trJMSikr5r_N{M&P3&THh8E2Cr%p?E^W(9HUh!UbXnL?
+zVISp41TT)CzI<)zp~LC6kRlmD99x#*liC1dPr%aH2Kd-gi`q@*8fGrXfa!*%8YRXu
+z1&Oqwn*}XGSE*JJw&x~8Re!#!9>`6D8>+&51XDE}YKhhU2uC-E?>5k-IkJel?K7Ww
+SQ9W9T{1)XtLvIUd)B7JgR3YR5
+
+-- 
+2.27.0.windows.1
+
